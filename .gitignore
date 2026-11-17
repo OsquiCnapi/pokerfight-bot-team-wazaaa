@@ -31,3 +31,7 @@ go.work.sum
 # Editor/IDE
 # .idea/
 # .vscode/
+
+# Ejecutables compilados y resultados de las pruebas locales
+bin/
+pruebas/resultados*/
