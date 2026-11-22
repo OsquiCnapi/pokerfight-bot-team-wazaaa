@@ -154,7 +154,7 @@ func (c *Cerebro) postflop(s *situacion) decision {
 		mejor := opcion{decision{tipo: pagar, motivo: motivo("paso: equidad %.0f%%", 100*eq)}, evPasar}
 
 		if puedeSubir && maximo >= minimo {
-			conAllIn := maximo <= 3*pozo || eq >= 0.85
+			conAllIn := maximo <= 3*pozo || (eq >= 0.85 && maximo <= 6*pozo)
 			for _, pone := range candidatos(fraccionesApuesta, pozo, minimo, conAllIn) {
 				ev, seRetiran, eqSiPagan := c.evAgresiva(s, f, pone)
 				// Las apuestas grandes solo tienen sentido en los extremos:
@@ -219,7 +219,7 @@ func (c *Cerebro) postflop(s *situacion) decision {
 	}
 
 	if puedeSubir && maximo > costo {
-		conAllIn := maximo <= 2.5*(pozo+costo) || eq >= 0.9
+		conAllIn := maximo <= 2.5*(pozo+costo) || (eq >= 0.9 && maximo <= 6*(pozo+costo))
 		for _, pone := range candidatos(fraccionesSubida, pozo+costo, math.Max(minimo, costo+1), conAllIn) {
 			if pone <= costo {
 				continue
